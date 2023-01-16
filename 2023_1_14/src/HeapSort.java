@@ -27,8 +27,8 @@ public class HeapSort {
             index = father;
             father = (index - 1) / 2;
         }
-
     }
+
 
     public static void swap1(int[] arr, int i, int j) {
         int tmp = arr[i];
