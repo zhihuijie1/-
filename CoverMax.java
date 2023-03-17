@@ -1,5 +1,8 @@
 package P1_Heap;
 
+
+//  线段最大重合问题
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -86,6 +89,8 @@ public class CoverMax {
         }
     }
 
+
+    // for test- --
     public static void main(String[] args) {
         Line l1 = new Line(4, 9);
         Line l2 = new Line(1, 4);
