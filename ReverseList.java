@@ -12,14 +12,15 @@ public class ReverseList {
             this.value = value;
         }
     }
+
     // 反转单链表
     public static Node reverseLinkedList(Node head) {
         // 注意：这里的head是一个形参，是对实参的一份拷贝，它的指向并不影响实参
         Node pre = null;
-        while(head != null) {
+        while (head != null) {
             Node next = head.next;
             head.next = pre;
-            pre =head;
+            pre = head;
             head = next;
         }
         return pre;
@@ -39,7 +40,7 @@ public class ReverseList {
 
     public static DoubleNode reverseDoubleList(DoubleNode head) {
         DoubleNode pre = null;
-        while(head != null) {
+        while (head != null) {
             DoubleNode next = head.next;
             head.next = pre;
             head.last = next;

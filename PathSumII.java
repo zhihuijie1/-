@@ -1,8 +1,6 @@
 package Novice_class;
 
-import javax.swing.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class PathSumII {
@@ -41,7 +39,7 @@ public class PathSumII {
             }
             return;
         }
-
+        // 非叶子节点
         preSum = preSum + x.val;
         path.add(x.val);
         process(x.left, sum, preSum, path, ans);

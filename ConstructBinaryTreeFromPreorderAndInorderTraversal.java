@@ -32,7 +32,7 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
         if(L1 == R1) {
             return new TreeNode(pre[L1]);
         }
-        if(L1 > R1 || L2 > R2) {
+        if(L1 > R1) {
             return null;
         }
         TreeNode head = new TreeNode(pre[L1]);

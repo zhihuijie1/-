@@ -10,6 +10,7 @@ public class ShowComparator {
         String name;
         int age;
         int id;
+
         // 方法
         @Override
         public String toString() {
@@ -19,10 +20,12 @@ public class ShowComparator {
                     ", id=" + id +
                     '}';
         }
+
         // 构造器
         public Student() {
 
         }
+
         public Student(String name, int id, int age) {
             this.name = name;
             this.id = id;
@@ -34,11 +37,11 @@ public class ShowComparator {
     static class IdComparator implements Comparator<Student> {
         @Override
         public int compare(Student o1, Student o2) {
-            if(o1.age < o2.age) {
+            if (o1.age < o2.age) {
                 return -1;
-            }else if(o1.age > o2.age) {
+            } else if (o1.age > o2.age) {
                 return 1;
-            }else {
+            } else {
                 return 0;
             }
         }
@@ -57,22 +60,22 @@ public class ShowComparator {
     }
 
     public static void main(String[] args) {
-        int[] array = {1,5,3,7,2,9,6,4,1,5};
+        int[] array = {1, 5, 3, 7, 2, 9, 6, 4, 1, 5};
         printArray(array);
         Arrays.sort(array);
         System.out.println();
         printArray(array);
 
-        Student s1 = new Student("张三",1,20);
-        Student s2 = new Student("李四",2,23);
-        Student s3 = new Student("王五",3,17);
-        Student s4 = new Student("老六",4,52);
-        Student s5 = new Student("哈奇",5,34);
-        Student[] students = {s1,s2,s3,s4,s5};
+        Student s1 = new Student("张三", 1, 20);
+        Student s2 = new Student("李四", 2, 23);
+        Student s3 = new Student("王五", 3, 17);
+        Student s4 = new Student("老六", 4, 52);
+        Student s5 = new Student("哈奇", 5, 34);
+        Student[] students = {s1, s2, s3, s4, s5};
         System.out.println("-------------------");
         printArray2(students);
         System.out.println();
-        Arrays.sort(students,new IdComparator());
+        Arrays.sort(students, new IdComparator());
         printArray2(students);
         System.out.println("----------------");
         ArrayList<Student> arrayList = new ArrayList<>();

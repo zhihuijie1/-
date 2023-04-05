@@ -37,10 +37,10 @@ public class LinkedListToQueueAndStack {
 
         public void offer(V value) {
             Node<V> cur = new Node<>(value);
-            if(head == null) {
+            if (head == null) {
                 head = cur;
                 tail = cur;
-            }else {
+            } else {
                 tail.next = cur;
                 tail = cur;
             }
@@ -49,12 +49,12 @@ public class LinkedListToQueueAndStack {
         }
 
         public V poll() {
-            if(this.isEmpty()) {
+            if (this.isEmpty()) {
                 return null;
             }
             V cur = head.value;
             head = head.next;
-            if(head == null) {
+            if (head == null) {
                 tail = null;
             }
             usedSized--;
@@ -93,7 +93,7 @@ public class LinkedListToQueueAndStack {
         }
 
         public V pop() {
-            if(this.isEmpty()) {
+            if (this.isEmpty()) {
                 return null;
             }
             V value = this.head.value;
@@ -101,6 +101,7 @@ public class LinkedListToQueueAndStack {
             //usedSize--;
             return value;
         }
+
         public V peek() {
             return this.isEmpty() ? null : this.head.value;
         }
@@ -172,42 +173,42 @@ public class LinkedListToQueueAndStack {
         int MaxValue = 2200000;
         System.out.println("测试开始");
         for (int i = 0; i < testTime; i++) {
-            if(stack1.isEmpty() != stack2.isEmpty()) {
+            if (stack1.isEmpty() != stack2.isEmpty()) {
                 System.out.println("oops");
             }
-            if(stack1.size() != stack2.size()) {
+            if (stack1.size() != stack2.size()) {
                 System.out.println("oops");
             }
             double decide = Math.random();
-            if(decide < 0.33) {
-                int value = (int)(Math.random() * MaxValue);
+            if (decide < 0.33) {
+                int value = (int) (Math.random() * MaxValue);
                 stack1.push(value);
                 stack2.push(value);
-            }else if(decide < 0.66) {
-                if(!stack1.isEmpty()) {
+            } else if (decide < 0.66) {
+                if (!stack1.isEmpty()) {
                     int num1 = stack1.pop();
                     int num2 = stack2.pop();
-                    if(num1 != num2) {
+                    if (num1 != num2) {
                         System.out.println("oops");
                     }
                 }
-            }else {
-                if(!stack1.isEmpty()) {
+            } else {
+                if (!stack1.isEmpty()) {
                     int num1 = stack1.peek();
                     int num2 = stack2.peek();
-                    if(num1 != num2) {
+                    if (num1 != num2) {
                         System.out.println("oops");
                     }
                 }
             }
         }
 
-        if(stack1.size() != stack2.size()) {
+        if (stack1.size() != stack2.size()) {
             System.out.println("oops");
         }
 
-        while(!stack1.isEmpty()) {
-            if(stack1.pop() != stack2.pop()) {
+        while (!stack1.isEmpty()) {
+            if (stack1.pop() != stack2.pop()) {
                 System.out.println("oops");
             }
         }
