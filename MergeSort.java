@@ -1,26 +1,46 @@
-package Novice_class;
+package algorithmbasic.class5;
 
 import java.util.Arrays;
 
-// 归并排序
+// 归并排序的非递归实现
 public class MergeSort {
-    // 递归方法实现
     public static void mergeSort2(int[] arr) {
         if (arr == null || arr.length < 2) {
             return;
         }
-        process(arr, 0, arr.length - 1);
+        process(arr);
     }
 
-    // 将数组arr[L , R]范围上排有序
-    public static void process(int[] arr, int L, int R) {
-        if (L == R) {
-            return;
+    public static void process(int[] arr) {
+        int N = arr.length;
+        // 步长
+        int mergeSize = 1;
+        while (mergeSize < N) {
+            int L = 0;
+            while (L < N) {
+                // 越界条件的判断
+                if (mergeSize >= N - L) {
+                    break;
+                }
+                // L + mergeSize也有可能越界，所以有了上面的代码
+                int mid = L + mergeSize - 1;
+                /*
+                根据越界条件的判断，mid小于N
+                if (mid > N) {
+                   break;
+                }
+                */
+                // 有左半部分
+                int R = Math.min((mid + mergeSize), (N - 1));
+                merge(arr, L, mid, R);
+                L = R + 1;
+            }
+            // 防止数字越界溢出，导致死循环。
+            if (mergeSize > (N / 2)) {
+                break;
+            }
+            mergeSize *= 2;
         }
-        int mid = L + ((R - L) >> 1);
-        process(arr, L, mid);
-        process(arr, mid + 1, R);
-        merge(arr, L, mid, R);
     }
 
     public static void merge(int[] arr, int L, int mid, int R) {
@@ -31,90 +51,60 @@ public class MergeSort {
         while (p1 <= mid && p2 <= R) {
             help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
         }
+        // 后面两个循环只会执行一个，因为P1,P2并不是同时走的
         while (p1 <= mid) {
             help[i++] = arr[p1++];
         }
         while (p2 <= R) {
             help[i++] = arr[p2++];
         }
-
         for (int j = 0; j < help.length; j++) {
-            //非常的重要
             arr[L + j] = help[j];
         }
     }
 
-    // for test
-    public static int[] generateRandomArray(int maxSize, int maxValue) {
-        int[] arr = new int[(int) ((maxSize + 1) * Math.random())];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = (int) ((maxValue + 1) * Math.random()) - (int) (maxValue * Math.random());
-        }
-        return arr;
-    }
+    // for test ------
 
-    // for test
-    public static int[] copyArray(int[] arr) {
-        if (arr == null) {
-            return null;
-        }
-        int[] res = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            res[i] = arr[i];
-        }
-        return res;
-    }
-
-    // for test
-    public static boolean isEqual(int[] arr1, int[] arr2) {
-        if ((arr1 == null && arr2 != null) || (arr1 != null && arr2 == null)) {
-            return false;
-        }
-        if (arr1 == null && arr2 == null) {
-            return true;
-        }
-        if (arr1.length != arr2.length) {
-            return false;
-        }
-        for (int i = 0; i < arr1.length; i++) {
-            if (arr1[i] != arr2[i]) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    // for test
-    public static void printArray(int[] arr) {
-        if (arr == null) {
-            return;
-        }
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
-        System.out.println();
-    }
-
-    // for test
     public static void main(String[] args) {
-        int testTime = 500000;
-        int maxSize = 100;
-        int maxValue = 100;
+        int testTime = 100000;
+        int maxValue = 1000;
+        int maxArrayLength = 1000;
         System.out.println("测试开始");
         for (int i = 0; i < testTime; i++) {
-            int[] arr1 = generateRandomArray(maxSize, maxValue);
-            int[] arr2 = copyArray(arr1);
-            //mergeSort1(arr1);
-            Arrays.sort(arr1);
-            mergeSort2(arr2);
-            if (!isEqual(arr1, arr2)) {
-                System.out.println("出错了！");
-                printArray(arr1);
-                printArray(arr2);
-                break;
+            int[] array1 = newArray(maxValue, maxArrayLength);
+            int[] array2 = copyArray(array1);
+            mergeSort2(array1);
+            Arrays.sort(array2);
+            for (int j = 0; j < array1.length; j++) {
+                if (array1[j] != array2[j]) {
+                    System.out.println("OOPS");
+                }
             }
         }
         System.out.println("测试结束");
     }
 
+
+    // 创建数组的函数
+    public static int[] newArray(int maxValue, int maxArrayLength) {
+        // 随机生成数组的长度  [0,1000)
+        int arrayLength = (int) (Math.random() * maxArrayLength);
+        int[] array = new int[arrayLength];
+        // 给数组赋值
+        for (int i = 0; i < arrayLength; i++) {
+            // 产生一个随机值  [0,1000)
+            int value = (int) (Math.random() * maxValue);
+            array[i] = value;
+        }
+        return array;
+    }
+
+    // 拷贝数组的函数   这样数组的heap地址不同
+    public static int[] copyArray(int[] array) {
+        int[] arr = new int[array.length];
+        for (int i = 0; i < array.length; i++) {
+            arr[i] = array[i];
+        }
+        return arr;
+    }
 }
