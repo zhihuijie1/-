@@ -10,23 +10,24 @@ k相对于数组长度来说是比较小的。请选择一个合适的排序策�
  */
 public class SortArrayDistanceLessK {
     public static void sortedArrDistanceLessK(int[] arr, int k) {
-        if(arr == null || arr.length < 2 || k == 0) {
+        if (arr == null || arr.length < 2 || k == 0) {
             return;
         }
         int index = 0;
         int i = 0;
+        // 默认是小根堆
         PriorityQueue<Integer> heap = new PriorityQueue<>();
-        while (i <= Math.min(arr.length - 1 ,  k - 1)) {
+        while (i <= Math.min(arr.length - 1, k)) {
             heap.add(arr[i]);
             i++;
         }
-        while(i <= arr.length - 1) {
+        while (i <= arr.length - 1) {
             arr[index] = heap.poll();
             index++;
             heap.add(arr[i]);
             i++;
         }
-        while(!heap.isEmpty()) {
+        while (!heap.isEmpty()) {
             arr[index] = heap.poll();
             index++;
         }
